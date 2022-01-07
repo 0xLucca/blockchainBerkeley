@@ -1,4 +1,6 @@
-pragma solidity ^0.4.25;
+// SPDX-License-Identifier: UNLICENSED
+
+pragma solidity ^0.8.7;
 
 contract SimpleBank {
 
@@ -6,7 +8,7 @@ contract SimpleBank {
     address public owner;
     event LogDepositMade(address accountAddress, uint amount);
 
-    constructor () public {
+    constructor () {
         owner = msg.sender;
     }
 
@@ -25,7 +27,7 @@ contract SimpleBank {
 
         balances[msg.sender] -= withdrawAmount;
 
-        msg.sender.transfer(withdrawAmount);
+        payable(msg.sender).transfer(withdrawAmount);
 
         return balances[msg.sender];
     }
